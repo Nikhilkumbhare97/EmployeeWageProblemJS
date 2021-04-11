@@ -9,6 +9,7 @@ const MAX_WORKING_HRS_IN_MONTH = 100;
 let totalEmpHrs = 0;
 let totalWorkingDays = 0;
 let empDailyWageArray = new Array();
+let empDailyWageMap = new Map();
 
 while (totalEmpHrs < MAX_WORKING_HRS_IN_MONTH && totalWorkingDays < WORKING_DAYS_PER_MONTH) {
     totalWorkingDays++;
@@ -16,8 +17,10 @@ while (totalEmpHrs < MAX_WORKING_HRS_IN_MONTH && totalWorkingDays < WORKING_DAYS
     let empHrs = GetWorkingHrs(empCheck);
     totalEmpHrs += empHrs;
     empDailyWageArray.push(calulateDailyWage(empHrs));
+    empDailyWageMap.set(totalWorkingDays, calulateDailyWage(empHrs))
 }
-console.log(empDailyWageArray);
+// console.log(empDailyWageArray);
+console.log(empDailyWageMap);
 
 //A - Calc Total Wage Using Array for Each or Reduce Method
 let totEmpWage = 0;
@@ -31,6 +34,7 @@ function totalWages(totalWage, dailyWage) {
     return totalWage + dailyWage;
 }
 console.log("Total Employee Wage with Reduce : " + empDailyWageArray.reduce(totalWages, 0));
+console.log("Total Employee Wage using Map : " + Array.from(empDailyWageMap.values()).reduce(totalWages, 0));
 
 //B - Show the Day along with Daily Wage using Array map helper Function
 let dailyCounter = 0;
